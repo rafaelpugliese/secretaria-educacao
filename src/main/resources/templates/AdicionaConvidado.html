@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Adicionar Convidado</title>
+
+    <link href="/lib/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <h1 class="card-header">Adicionar Convidado</h1>
+
+            <form class="form-group" method="post" th:action="@{/convidados/adicionar}"
+                  th:object="${convidado}">
+
+            <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                <div th:each="error : ${#fields.errors()}">
+                    <span th:text="${error}"></span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <input type="hidden" th:field="*{id}">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nome" autofocus th:field="*{nome}" />
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Acompanhantes" th:field="*{qtdAcompanhantes}" />
+                </div>
+                <div class="input-group mb-3">
+                    <input type="date" class="form-control" placeholder="Data de Nascimento" th:field="*{dataNascimento}" />
+                </div>
+                <fieldset>
+                    <legend>Tipo de Gravata</legend>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Cor" th:field="*{tipoGravata.cor}" />
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Tamanho" th:field="*{tipoGravata.tamanho}" />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Bebidas</legend>
+                    <div class="input-group mb-3">
+                        <select th:field="*{listaBebida}" multiple>
+                            <option th:each="bebida : ${listaBebidas}" th:value="${bebida.id}" th:text="${bebida.tipo} + ' (' + ${bebida.nome} + ')'"></option>
+                        </select>
+                    </div>
+                </fieldset>
+                <div class="text-right">
+                    <a th:href="@{/convidados/listar}" class="btn btn-outline-secondary">Voltar</a>
+                    <button type="submit" class="btn btn-success" th:text="${id} == null ? 'Salvar' : 'Editar'"></button>
+                </div>
+            </div>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Lista de Convidados</title>
+
+    <link href="/lib/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <h1 class="card-header">Lista de Convidados</h1>
+
+            <div class="alert alert-success" th:if="${mensagem}">
+                    <span th:text="${mensagem}"></span>
+            </div>
+
+            <div class="card-body">
+                <div class="text-right">
+                    <a class="btn btn-primary" th:href="@{/bebidas/listar}">Listar Bebidas</a>
+                    <a class="btn btn-primary" th:href="@{/convidados/adicionar}">Adicionar Convidado</a>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Nome</th>
+                        <th class="text-center">Data de Nascimento</th>
+                        <th class="text-center">Acompanhantes</th>
+                        <th class="text-center">Bebidas</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="convidado : ${convidados}">
+                        <td th:text="${convidado.nome}"></td>
+                        <td th:text="${#dates.format(convidado.dataNascimento, 'dd/MM/yyyy')}" class="text-center"></td>
+                        <td th:text="${convidado.qtdAcompanhantes}" class="text-center"></td>
+                        <td th:text="${convidado.listaBebida.size()}" class="text-center"></td>
+                        <td class="text-center">
+                            <a th:href="@{/convidados/remover/{id}(id=${convidado.id})}">
+                                <i class="material-icons" title="Remover">delete</i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a th:href="@{/convidados/editar/{id}(id=${convidado.id})}">
+                                <i class="material-icons" title="Editar">edit</i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer text-right">
+            <a th:href="@{/logout}">Sair</a>
+        </div>
+    </div>
+
+</body>
+</html>
