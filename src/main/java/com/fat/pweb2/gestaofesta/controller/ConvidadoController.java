@@ -14,7 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
+
+import static com.fat.pweb2.gestaofesta.util.SessaoUtil.obterLoginUsuario;
 
 @Controller
 @RequestMapping("/convidados")
@@ -27,15 +28,16 @@ public class ConvidadoController {
     private BebidaRepository bebidas;
 
     @GetMapping("/listar")
-    public ModelAndView listar(){
+    public ModelAndView listar() {
         ModelAndView mv = new ModelAndView("ListaConvidados");
         mv.addObject("convidados", convidados.findAll());
+        mv.addObject("usuario", obterLoginUsuario());
 
         return mv;
     }
 
     @GetMapping("/adicionar")
-    public ModelAndView adicionar(){
+    public ModelAndView adicionar() {
         ModelAndView mv = new ModelAndView("AdicionaConvidado");
         mv.addObject(new Convidado());
         mv.addObject("listaBebidas", this.bebidas.findAll());
@@ -46,10 +48,10 @@ public class ConvidadoController {
     @PostMapping("/adicionar")
     public ModelAndView adicionar(@Valid Convidado convidado,
                                   BindingResult result,
-                                  RedirectAttributes attributes){
+                                  RedirectAttributes attributes) {
         ModelAndView mv = new ModelAndView();
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             mv.setViewName("AdicionaConvidado");
             mv.addObject("listaBebidas", this.bebidas.findAll());
             return mv;
@@ -57,7 +59,7 @@ public class ConvidadoController {
 
         mv.setViewName("redirect:/convidados/listar");
 
-        if(convidado.getId() != null){
+        if (convidado.getId() != null) {
             attributes.addFlashAttribute("mensagem", "Convidado editado com sucesso.");
         } else {
             attributes.addFlashAttribute("mensagem", "Convidado adicionado com sucesso.");
@@ -70,7 +72,7 @@ public class ConvidadoController {
 
     @GetMapping("/remover/{id}")
     public ModelAndView remover(@PathVariable("id") Long id,
-                                RedirectAttributes attributes){
+                                RedirectAttributes attributes) {
         this.convidados.deleteById(id);
         ModelAndView mv = new ModelAndView("redirect:/convidados/listar");
         attributes.addFlashAttribute("mensagem", "Convidado removido com sucesso.");
@@ -79,7 +81,7 @@ public class ConvidadoController {
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable("id") Long id){
+    public ModelAndView editar(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("AdicionaConvidado");
         mv.addObject("convidado", this.convidados.findById(id));
         mv.addObject("id", id);

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width"/>
+
+        <title>Login</title>
+
+        <link href="/lib/bootstrap.min.css" rel="stylesheet"/>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="card">
+                <h1 class="card-header">Realizar Login</h1>
+
+                <form class="form-group" method="POST" th:action="@{/entrar}" >
+
+                    <!-- Exibe a mensagem de erro quando existente-->
+                    <div class="alert alert-danger" th:if="${mensagemErro}">
+                        <span th:text="${mensagemErro}"></span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Nome" autofocus name='username' />
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" placeholder="senha" name='password' />
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-success" th:text="Autenticar"></button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </body>
+</html>

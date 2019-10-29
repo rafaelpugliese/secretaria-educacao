@@ -57,6 +57,13 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>webjars-locator-core</artifactId>
 		</dependency>
+
+		<!-- Biblioteca necessária para funcionar sec:authorize="hasRole('**')" -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
