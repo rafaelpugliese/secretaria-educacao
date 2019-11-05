@@ -25,4 +25,12 @@ public class EscolaAluno implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_aluno", referencedColumnName = "id_aluno", nullable = false)
     private Aluno aluno;
+
+    public EscolaAluno() {
+    }
+
+    public EscolaAluno(Escola escola, Aluno aluno) {
+        this.escola = escola;
+        this.aluno = aluno;
+    }
 }
