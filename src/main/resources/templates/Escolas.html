@@ -16,6 +16,10 @@
     <div class="card">
         <h1 class="card-header">Escolas</h1>
 
+        <div class="row justify-content-center" style="padding: 10px;">
+            <h4>Listagem de Escolas</h4>
+        </div>
+
         <div class="card-body">
             <table class="table">
                 <thead class="thead-light">
@@ -32,8 +36,8 @@
                     <td th:text="${escola.nome}"></td>
                     <td th:text="${escola.endereco}"></td>
                     <td class="text-center">
-                        <a th:href="@{/escolaAluno/{id}(id=${escola.id})}">
-                            <i class="material-icons" title="Listar Alunos">Listar Alunos</i>
+                        <a th:href="@{/alunos/{idEscola}(idEscola=${escola.id})}">
+                            <i class="material-icons" title="Alunos">Alunos</i>
                         </a>
                     </td>
                 </tr>

@@ -9,6 +9,11 @@ public class DataNascimentoValidator implements ConstraintValidator<DataNascimen
 
     @Override
     public boolean isValid(Date date, ConstraintValidatorContext context) {
+
+        if (date == null) {
+            return false;
+        }
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return cal.get(Calendar.YEAR) >= 2019;

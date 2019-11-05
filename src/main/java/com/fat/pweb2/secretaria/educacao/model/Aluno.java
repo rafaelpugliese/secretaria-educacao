@@ -24,6 +24,7 @@ public class Aluno implements Serializable {
     private Long id;
 
     @NotEmpty(message = "Informe o nome do Aluno.")
+    @NotNull(message = "Informe o nome do Aluno.")
     private String nome;
 
     @OneToOne(mappedBy = "aluno")

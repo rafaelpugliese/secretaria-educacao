@@ -8,6 +8,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -33,5 +35,11 @@ public class Escola implements Serializable {
     @OneToMany(mappedBy = "escola", cascade = CascadeType.ALL)
     private Set<EscolaAluno> listaEscolaAluno;
 
-
+    public List<Aluno> obterAlunos() {
+        List<Aluno> alunos = new ArrayList<>();
+        for (EscolaAluno escolaAluno : this.listaEscolaAluno) {
+            alunos.add(escolaAluno.getAluno());
+        }
+        return alunos;
+    }
 }
