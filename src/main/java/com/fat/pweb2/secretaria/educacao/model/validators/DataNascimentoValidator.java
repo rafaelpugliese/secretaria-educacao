@@ -1,4 +1,4 @@
-package com.fat.pweb2.gestaofesta.model.validators;
+package com.fat.pweb2.secretaria.educacao.model.validators;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

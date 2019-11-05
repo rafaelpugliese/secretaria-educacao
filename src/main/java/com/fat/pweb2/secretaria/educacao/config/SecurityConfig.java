@@ -1,4 +1,4 @@
-package com.fat.pweb2.gestaofesta.config;
+package com.fat.pweb2.secretaria.educacao.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,40 +17,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
 
-                // Define que para acessar todas as páginas deve estar autenticado
                 .anyRequest().authenticated()
 
                 .and().formLogin()
 
-                // Define a página de login
-                .loginPage("/loginfat").permitAll()
+                .loginPage("/loginSecretaria").permitAll()
 
-                // Define qual url o springsecurity utilizará para realizar o login
                 .loginProcessingUrl("/entrar")
 
-                // Define qual a url que será utilizada para o login com sucesso, definindo que sempre será redirecionado
-                .defaultSuccessUrl("/convidados/listar", true)
+                .defaultSuccessUrl("/home", true)
 
-                // Define qual url será redirecionado quando ocorrer um erro no login (erro de login e senha por exemplo)
                 .failureUrl("/errologin")
 
-                // Define a url de logout
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 
-                // Define qual url o usuário será redirecionado em caso de sucesso
-                .logoutSuccessUrl("/loginfat").permitAll()
+                .logoutSuccessUrl("/loginSecretaria").permitAll()
 
-                // Deleta variável da sessão onde armazena o ID da sessão
                 .deleteCookies("JSESSIONID")
 
-                // Invalida sessão
                 .invalidateHttpSession(true);
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        // ignora as url para acesso, geralmente são adicionadas outras urls como /css/**, /img/** ...
-        web.ignoring().antMatchers("/lib/**");
+        web.ignoring().antMatchers("/lib/**", "/imagem/**");
     }
 
     @Override
@@ -58,13 +48,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         builder
                 .inMemoryAuthentication()
 
-                // Adiciona o usuário pedro em memória
-                .withUser("pedro").password("{noop}teste").roles("ADMIN")
+                .withUser("professor").password("{noop}teste").roles("PROFESSOR")
 
                 .and()
 
-                // Adiciona o usuário felipe em memória
-                .withUser("felipe").password("{noop}teste").roles("USER");
+                .withUser("aluno").password("{noop}teste").roles("ALUNO");
     }
 
 }

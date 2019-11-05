@@ -1,9 +1,3 @@
-insert into tipo_gravata (id, cor, tamanho) values (1, 'azul', 'P');
-
-insert into bebida (id, tipo, nome) values (1, 'Cerveja', 'Heineken');
-insert into bebida (id, tipo, nome) values (2, 'Whisky', 'Jack Daniels');
-insert into bebida (id, tipo, nome) values (3, 'Vodca', 'Absolut');
-
-insert into convidado (id, nome, qtd_acompanhantes, data_nascimento, tipo_gravata_id) values (1, 'Pedro Ragazzo', 2, '1987-03-07', 1);
-insert into convidado (id, nome, qtd_acompanhantes, data_nascimento, tipo_gravata_id) values (2, 'Maria do Bairro', 3, '1985-10-21', 1);
-insert into convidado (id, nome, qtd_acompanhantes, data_nascimento, tipo_gravata_id) values (3, 'Ricardo Electro', 1, '1982-09-12', 1);
+insert into escola (id_escola, nome, endereco) values (1, 'São José', 'Cruzamento com a Rua Augusta, R. Fernandes de Barros, S/N - Centro, Maceió - AL, 57020-02');
+insert into escola (id_escola, nome, endereco) values (2, 'Marista', 'Maceió - Jardim da Saúde, Maceió - AL');
+insert into escola (id_escola, nome, endereco) values (3, 'Contato', 'R. Prof. Silvio Macedo, 125 - Jatiúca, Maceió - AL, 57036-740');

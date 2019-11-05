@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <title>Escolas</title>
+
+    <link href="/lib/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <h1 class="card-header">Escolas</h1>
+
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>listar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="escola : ${escolas}">
+                    <td th:text="${escola.id}"></td>
+                    <td th:text="${escola.nome}"></td>
+                    <td th:text="${escola.endereco}"></td>
+                    <td class="text-center">
+                        <a th:href="@{/escolaAluno/{id}(id=${escola.id})}">
+                            <i class="material-icons" title="Listar Alunos">Listar Alunos</i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="padding: 10px">
+            <a th:href="@{/home}" class="col-md-6" >
+                <button type="button" class="btn btn-success" th:text="'Voltar'"></button>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

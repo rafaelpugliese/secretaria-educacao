@@ -1,4 +1,4 @@
-package com.fat.pweb2.gestaofesta;
+package com.fat.pweb2.secretaria.educacao;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class GestaoFestaApplicationTests {
+public class SecretariaEducacaoApplicationTests {
 
 	@Test
 	public void contextLoads() {

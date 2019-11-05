@@ -1,4 +1,4 @@
-package com.fat.pweb2.gestaofesta.util;
+package com.fat.pweb2.secretaria.educacao.util;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
