@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <title>Alunos</title>
+
+    <link href="/lib/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <h1 class="card-header">Alunos</h1>
+
+        <div class="row justify-content-center" style="padding: 10px;">
+            <h4>Listagem de alunos</h4>
+        </div>
+
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Data Nascimento</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="aluno : ${alunos}">
+                    <td th:text="${aluno.id}"></td>
+                    <td th:text="${aluno.nome}"></td>
+                    <td th:text="${aluno.dataNascimento}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="padding: 10px">
+            <a th:href="@{/escolas/}" class="col-md-6">
+                <button type="button" class="btn btn-success" th:text="'Voltar'"></button>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

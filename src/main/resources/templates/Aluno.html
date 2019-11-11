@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <title>Cadastro de Aluno</title>
+
+    <link href="/lib/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <h1 class="card-header">Cadastro de Aluno</h1>
+
+        <div class="row justify-content-center" style="padding: 10px;">
+            <h4>Cadastro de Aluno</h4>
+        </div>
+
+        <form class="form-group" method="post" th:action="@{/aluno/adicionar}" th:object="${aluno}">
+
+            <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                <div th:each="error : ${#fields.errors()}">
+                    <span th:text="${error}"></span>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <fieldset>
+                    <legend>Escolas</legend>
+                    <div class="input-group mb-3" th:object="${escola}">
+                        <select th:field="*{id}" class="form-control form-control-lg">
+                            <option th:each="escola : ${escolas}" th:value="${escola.id}" th:text="${escola.nome}">
+                            </option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"/>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="date" class="form-control" placeholder="Data de Nascimento"
+                           th:field="*{dataNascimento}"/>
+                </div>
+            </div>
+
+            <div style="padding: 10px">
+                <a th:href="@{/home}" class="col-md-6">
+                    <button type="button" class="btn btn-success" th:text="'Voltar'"></button>
+                </a>
+                <a class="col-md-6">
+                    <button type="submit" class="btn btn-success" th:text="'Cadastrar'"></button>
+                </a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

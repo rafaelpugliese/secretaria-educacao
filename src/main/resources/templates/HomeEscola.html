@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
@@ -29,9 +30,16 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div style="padding: 10px">
+                <div style="padding: 10px" sec:authorize="hasRole('ROLE_PROFESSOR')">
                     <a th:href="@{/aluno/}" class="col-md-6">
                         <button type="button" class="btn btn-success" th:text="'Cadastrar Aluno'"></button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div style="padding: 10px; text-align: right" >
+                    <a th:href="@{/logout}" class="col-md-6">
+                        <button type="button" class="btn btn-success" th:text="'Sair'"></button>
                     </a>
                 </div>
             </div>
