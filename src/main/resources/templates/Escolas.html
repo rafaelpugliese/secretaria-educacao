@@ -20,6 +20,9 @@
             <h4>Listagem de Escolas</h4>
         </div>
 
+        <div class="text-right">
+            <span style="padding-right: 20px" th:text="'Quantidade de escolas: ' + ${qntEscolas}"></span>
+        </div>
         <div class="card-body">
             <table class="table">
                 <thead class="thead-light">
@@ -27,6 +30,7 @@
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Endereço</th>
+                    <th>Qnt Alunos</th>
                     <th>listar</th>
                 </tr>
                 </thead>
@@ -35,6 +39,7 @@
                     <td th:text="${escola.id}"></td>
                     <td th:text="${escola.nome}"></td>
                     <td th:text="${escola.endereco}"></td>
+                    <td th:text="${@alunoController.listarQuantidadeAlunos(escola.id)}"></td>
                     <td class="text-center">
                         <a th:href="@{/alunos/{idEscola}(idEscola=${escola.id})}">
                             <i class="material-icons" title="Alunos">Alunos</i>

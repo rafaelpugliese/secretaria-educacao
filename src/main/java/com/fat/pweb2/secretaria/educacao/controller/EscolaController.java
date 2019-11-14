@@ -18,6 +18,8 @@ public class EscolaController {
     public ModelAndView listar() {
         ModelAndView modelAndView = new ModelAndView("Escolas");
         modelAndView.addObject("escolas", this.escolaRepository.findAll());
+        modelAndView.addObject("qntEscolas", this.escolaRepository.listarQuantidadeEscolas());
         return modelAndView;
     }
+
 }

@@ -20,9 +20,9 @@
             <h4>Cadastro de Aluno</h4>
         </div>
 
-        <form class="form-group" method="post" th:action="@{/aluno/adicionar}" th:object="${aluno}">
+        <form class="form-group" method="post" th:action="@{/aluno/adicionar}" th:object="${escolaAluno}">
 
-            <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors()}">
                 <div th:each="error : ${#fields.errors()}">
                     <span th:text="${error}"></span>
                 </div>
@@ -32,8 +32,8 @@
 
                 <fieldset>
                     <legend>Escolas</legend>
-                    <div class="input-group mb-3" th:object="${escola}">
-                        <select th:field="*{id}" class="form-control form-control-lg">
+                    <div class="input-group mb-3">
+                        <select th:field="*{idEscola}" class="form-control form-control-lg">
                             <option th:each="escola : ${escolas}" th:value="${escola.id}" th:text="${escola.nome}">
                             </option>
                         </select>
@@ -41,12 +41,12 @@
                 </fieldset>
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"/>
+                    <input type="text" class="form-control" placeholder="Nome" th:field="*{aluno.nome}"/>
                 </div>
 
                 <div class="input-group mb-3">
                     <input type="date" class="form-control" placeholder="Data de Nascimento"
-                           th:field="*{dataNascimento}"/>
+                           th:field="*{aluno.dataNascimento}"/>
                 </div>
             </div>
 

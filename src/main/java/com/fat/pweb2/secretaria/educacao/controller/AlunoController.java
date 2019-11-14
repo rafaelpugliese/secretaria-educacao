@@ -9,7 +9,10 @@ import com.fat.pweb2.secretaria.educacao.repository.EscolaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,28 +35,26 @@ public class AlunoController {
     public ModelAndView aluno() {
         ModelAndView modelAndView = new ModelAndView("Aluno");
         modelAndView.addObject("escolas", escolaRepository.findAll());
-        modelAndView.addObject("aluno", new Aluno());
-        modelAndView.addObject("escola", new Escola());
+        modelAndView.addObject("escolaAluno", new EscolaAlunoDTO());
         return modelAndView;
     }
 
     @PostMapping("/aluno/adicionar")
-    public ModelAndView adicionar(@Valid Aluno aluno, Escola escola,
+    public ModelAndView adicionar(@Valid EscolaAlunoDTO escolaAlunoDTO,
                                   BindingResult result,
                                   RedirectAttributes attributes) {
-        ModelAndView modelAndView;
+        ModelAndView modelAndView = new ModelAndView();
 
         if (result.hasErrors()) {
-            modelAndView = new ModelAndView("Aluno");
+            modelAndView.setViewName("Aluno");
             modelAndView.addObject("escolas", escolaRepository.findAll());
-            modelAndView.addObject("aluno", new Aluno());
-            modelAndView.addObject("escola", new Escola());
+            modelAndView.addObject("escolaAluno", escolaAlunoDTO);
             return modelAndView;
         }
 
-        aluno = this.alunoRepository.save(aluno);
+        Aluno aluno = this.alunoRepository.save(escolaAlunoDTO.getAluno());
 
-        escola = escolaRepository.findById(escola.getId()).get();
+        Escola escola = escolaRepository.findById(escolaAlunoDTO.getIdEscola()).get();
         EscolaAluno escolaAluno = new EscolaAluno(escola, aluno);
 
         escolaAlunoRepository.save(escolaAluno);
@@ -68,6 +69,14 @@ public class AlunoController {
         Escola escola = escolaRepository.findById(idEscola).get();
         ModelAndView modelAndView = new ModelAndView("Alunos");
         modelAndView.addObject("alunos", escola.obterAlunos());
+        modelAndView.addObject("qntAlunos", escolaAlunoRepository.listarQuantidadeAlunosSQL(idEscola));
         return modelAndView;
     }
+
+    public Long listarQuantidadeAlunos(Long idEscola) {
+        this.escolaAlunoRepository.countByEscola_Id(idEscola);
+        escolaAlunoRepository.listarQuantidadeAlunosSQL(idEscola);
+        return this.escolaAlunoRepository.contarPorIdEscolaJPQL(idEscola);
+    }
+
 }
